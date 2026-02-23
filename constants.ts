@@ -9,7 +9,7 @@ export const BUSINESS_INFO = {
   phoneDisplay: "91+9899542012",
   rating: 4.8,
   reviewCount: 551,
-  mapEmbedUrl: `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=Alligator+Gym+%26+Fitness+Studio+Paharganj+New+Delhi`,
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.4736333118103!2d77.20724488097225!3d28.64553381289254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfdd2de9d4905%3A0xebca72e0778505f2!2sAlligator%20gym%20%26%20Fitness%20Studio%20%7C%20Paharganj!5e0!3m2!1sen!2sin!4v1771867455671!5m2!1sen!2sin",
   // Direct link to open the review dialog for the specific place ID derived from the CID
   googleReviewUrl: "https://www.google.com/search?q=Alligator+Fitness+Gym+New+Delhi&lrd=0x390cfdd2de9d4905:0xebca72e0778505f2,3,,,,",
   timings: {

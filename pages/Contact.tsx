@@ -113,7 +113,7 @@ export const Contact: React.FC = () => {
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Alligator Gym Location"
-                    className="filter grayscale contrast-125 opacity-90 hover:opacity-100 transition-opacity"
+                    className="w-full h-full"
                 ></iframe>
                 
                 {/* Overlay hint */}
