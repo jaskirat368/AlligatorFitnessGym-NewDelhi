@@ -1,5 +1,7 @@
 import { Review, Program, FAQ } from './types';
 
+export const GOOGLE_API_KEY = "AIzaSyCwNBSv-53FtkxP-gurTA_vRWEbf2eU_o4";
+
 export const BUSINESS_INFO = {
   name: "Alligator Fitness Gym",
   address: "1, Desh Bandhu Gupta Rd, near State Bank of India ATM, Bazar Sangatrashan, Multani Dhanda, Paharganj, New Delhi, Delhi 110055",
@@ -7,7 +9,7 @@ export const BUSINESS_INFO = {
   phoneDisplay: "91+9899542012",
   rating: 4.8,
   reviewCount: 551,
-  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.473631216552!2d77.2095408752896!3d28.645533875657687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfdd2de9d4905%3A0xebca72e0778505f2!2sAlligator%20gym%20%26%20Fitness%20Studio%20%7C%20Paharganj!5e0!3m2!1sen!2sin!4v1771402238573!5m2!1sen!2sin",
+  mapEmbedUrl: `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_API_KEY}&q=Alligator+Gym+%26+Fitness+Studio+Paharganj+New+Delhi`,
   // Direct link to open the review dialog for the specific place ID derived from the CID
   googleReviewUrl: "https://www.google.com/search?q=Alligator+Fitness+Gym+New+Delhi&lrd=0x390cfdd2de9d4905:0xebca72e0778505f2,3,,,,",
   timings: {

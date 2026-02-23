@@ -1,8 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
-import { BUSINESS_INFO, PROGRAMS, FAQS } from "../constants";
+import { BUSINESS_INFO, PROGRAMS, FAQS, GOOGLE_API_KEY } from "../constants";
 
 // Initialize Gemini API
-const apiKey = process.env.GEMINI_API_KEY;
+const apiKey = process.env.GEMINI_API_KEY || GOOGLE_API_KEY;
 const ai = new GoogleGenAI({ apiKey: apiKey || '' });
 
 const SYSTEM_INSTRUCTION = `
