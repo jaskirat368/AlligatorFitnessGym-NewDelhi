@@ -1,9 +1,16 @@
+import express from "express";
+import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
-import { BUSINESS_INFO, PROGRAMS, FAQS, GOOGLE_API_KEY } from "../constants";
+import { BUSINESS_INFO, PROGRAMS, FAQS } from "./constants";
 
-// Initialize Gemini API
-const apiKey = process.env.GEMINI_API_KEY || GOOGLE_API_KEY;
-const ai = new GoogleGenAI({ apiKey: apiKey || '' });
+const app = express();
+const PORT = 3000;
+
+// Securely store the API key on the server
+const GEMINI_API_KEY = "AIzaSyCvE9r9g5-Hq32OwwpHLSkIqYsFmQdrxEs";
+const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+
+app.use(express.json());
 
 const SYSTEM_INSTRUCTION = `
 You are the official AI Assistant for ${BUSINESS_INFO.name}, a premium fitness facility in New Delhi.
@@ -35,11 +42,13 @@ ${FAQS.map(f => `- Q: ${f.question} A: ${f.answer}`).join('\n')}
 **Goal:** Function as a real gym representative, not just a message router.
 `;
 
-export const sendMessageToGemini = async (userMessage: string, history: { role: 'user' | 'model', parts: { text: string }[] }[]) => {
+// API routes
+app.post("/api/chat", async (req, res) => {
   try {
-    if (!apiKey) {
-      console.error("Gemini API Key is missing");
-      return "I'm currently having trouble connecting to my brain. Please try again later or call us directly.";
+    const { message, history } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ error: "Message is required" });
     }
 
     const chat = ai.chats.create({
@@ -47,13 +56,36 @@ export const sendMessageToGemini = async (userMessage: string, history: { role: 
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
       },
-      history: history,
+      history: history || [],
     });
 
-    const result = await chat.sendMessage({ message: userMessage });
-    return result.text;
+    const result = await chat.sendMessage({ message });
+    res.json({ text: result.text });
   } catch (error) {
     console.error("Error calling Gemini API:", error);
-    return "I apologize, but I'm having a bit of trouble right now. Please try asking again or give us a call!";
+    res.status(500).json({ error: "Failed to get response from AI" });
   }
-};
+});
+
+async function startServer() {
+  // Vite middleware for development
+  if (process.env.NODE_ENV !== "production") {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: "spa",
+    });
+    app.use(vite.middlewares);
+  } else {
+    app.use(express.static("dist"));
+    // SPA fallback for production
+    app.get("*", (req, res) => {
+      res.sendFile("dist/index.html", { root: "." });
+    });
+  }
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+startServer();

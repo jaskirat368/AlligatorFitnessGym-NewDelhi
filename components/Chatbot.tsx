@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ChatMessage } from '../types';
 import { BUSINESS_INFO } from '../constants';
-import { sendMessageToGemini } from '../services/ai';
 
 export const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +47,23 @@ export const Chatbot: React.FC = () => {
     }));
 
     try {
-      const responseText = await sendMessageToGemini(userText, history);
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userText,
+          history: history,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch from backend');
+      }
+
+      const data = await response.json();
+      const responseText = data.text;
       
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),

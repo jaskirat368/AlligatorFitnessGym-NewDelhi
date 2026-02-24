@@ -1,7 +1,5 @@
 import { Review, Program, FAQ } from './types';
 
-export const GOOGLE_API_KEY = "AIzaSyCwNBSv-53FtkxP-gurTA_vRWEbf2eU_o4";
-
 export const BUSINESS_INFO = {
   name: "Alligator Fitness Gym",
   address: "1, Desh Bandhu Gupta Rd, near State Bank of India ATM, Bazar Sangatrashan, Multani Dhanda, Paharganj, New Delhi, Delhi 110055",
