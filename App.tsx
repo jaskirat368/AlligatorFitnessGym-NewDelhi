@@ -9,7 +9,6 @@ import { ProgramDetail } from './pages/ProgramDetail';
 import { Reviews } from './pages/Reviews';
 import { FAQ } from './pages/FAQ';
 import { Contact } from './pages/Contact';
-import { Chatbot } from './components/Chatbot';
 import { Intro } from './components/Intro';
 
 const ScrollToTop = () => {
@@ -42,7 +41,6 @@ const App: React.FC = () => {
           </Routes>
         </main>
         <Footer />
-        <Chatbot />
       </div>
     </Router>
   );
