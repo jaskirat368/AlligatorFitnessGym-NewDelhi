@@ -150,7 +150,7 @@ export const Home: React.FC = () => {
                 { icon: "📶", title: "Free WiFi", desc: "High-speed internet so you can stream music or work on the go." }
             ].map((item, index) => (
                 <Reveal key={index} delay={index * 0.1} direction="up" className="h-64">
-                  <div className="group h-full w-full cursor-pointer [perspective:1000px]">
+                  <div className="group h-full w-full cursor-pointer [perspective:1000px] select-none">
                       {/* 
                          Using Tailwind arbitrary values for 3D transforms to ensure functionality:
                          [transform-style:preserve-3d] - Ensures child elements exist in 3D space
